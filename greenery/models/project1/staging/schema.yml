@@ -50,6 +50,9 @@ models:
       - name: address_id
         tests: 
           - not_null
+          - relationships:
+              to: ref('adress')
+              field: address_id
   - name: stg_promos
     description: something
     columns:
@@ -60,6 +63,7 @@ models:
       - name: discount
         tests: 
           - not_null
+          - positive_value
       - name: status
         tests: 
           - not_null        
@@ -89,11 +93,20 @@ models:
       - name: user_id
         tests: 
           - not_null
+          - relationships: 
+              to: ref('users')
+              field: user_id
       - name: promo_id
         tests: 
+          - relationships: 
+              to: ref('promos')
+              field: promo_id
       - name: address_id
         tests:
-          - not_null    
+          - not_null   
+          - relationships:
+              to: ref('addresses')
+              field: address_id
       - name: created_at
         tests: 
           - not_null
@@ -103,15 +116,9 @@ models:
       - name: tracking_id
         tests: 
           - unique
-          - not_null
       - name: shipping_service
-        tests: 
-          - not_null
       - name: estimated_delivery_at
-        tests: 
-          - not_null
       - name: delivered_at
-        tests: 
       - name: status
         tests: 
           - not_null
@@ -124,6 +131,9 @@ models:
       - name: product_id
         tests: 
           - not_null
+          - relationships: 
+              to: ref('products')
+              field: product_id
       - name: quantity
         tests: 
           - not_null
@@ -140,6 +150,9 @@ models:
       - name: user_id
         tests: 
           - not_null
+          - relationships:
+              to: ref('users')
+              field: user_id
       - name: page_url
         tests:
           - not_null   
@@ -151,7 +164,11 @@ models:
           - not_null
       - name: order_id
         tests:
-          - not_null  
+          - relationships:
+              to: ref('orders')
+              field: order_id
       - name: product_id
         tests:
-          - not_null  
+          - relationships:
+              to: ref('products')
+              field: product_id
