@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+
+  - name: tutorial 
+    schema: public 
+    database: dbt 
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: addresses
+        description: User addresses that can be associated with orders
+      - name: users
+        description: User contact and profile update data
+      - name: promos
+        description: Coupon data
+      - name: products
+        description: Product price and inventory data
+      - name: orders
+        description: Order summary data
+      - name: order_items
+        description: Order details for quantity of specific products
+      - name: events
+        description: User browsing data
