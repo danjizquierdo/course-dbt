@@ -29,4 +29,4 @@ sources:
       - name: order_items
         description: Order details for quantity of specific products
       - name: events
-        description: User browsing data
+        description: User browsing data can be associated with users, orders and products
