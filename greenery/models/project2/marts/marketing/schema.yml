@@ -1,0 +1,81 @@
+version: 2
+
+models:
+  - name: int_session_product
+    columns:
+      - name: session_id
+        tests:
+          - relationships: 
+              to: ref('stg_events')
+              field: session_id
+      - name: user_id
+        tests:
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+      - name: product_id
+        tests: 
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: event_rank
+        tests:
+          - not_null
+  - name: dim_user_order
+    columns:
+      - name: user_id
+        tests: 
+          - unique
+          - not_null
+          - relationships:
+              to: ref('users')
+              field: user_id
+      - name: zipcode
+        tests: 
+          - not_null
+      - name: num_orders
+        tests: 
+          - positive_value    
+      - name: avg_num_products
+        tests:
+          - positive_value
+      - name: avg_price_total_dollars
+        tests: 
+          - positive_value
+      - name: total_items_purchased
+        tests:
+          - positive_value
+      - name: total_spent_dollars
+        tests:  
+          - positive_value
+      - name: first_order_placed_utc
+      - name: last_order_placed_utc
+  - name: fact_user_session 
+    columns:
+      - name: session_id
+        tests:
+        - not_null
+        - unique
+      - name: user_id
+        tests:
+        - not_null
+        - relationships:
+            to: ref('users')
+            field: user_id
+      - name: session_events
+        tests:
+          - not_null
+          - positive_value
+      - name: pages_visited
+        tests:
+          - not_null
+          - positive_value
+      - name: products_seen
+        tests:
+          - positive_value
+      - name: session_start_utc
+        tests:
+          - not_null
+      - name: session_end_utc
+        tests:
+          - not_null
