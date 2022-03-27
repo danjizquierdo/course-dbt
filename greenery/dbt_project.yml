@@ -36,6 +36,14 @@ models:
     # Config indicated by + and applies to all files under models/example/
     project1:
       +materialized: view
+    project2:
+      +materialized: table
+    on-run-end:
+      - "{% for schema in schemas %}grant usage on schema {{ schema }} to reporting;{% endfor %}"
+      - "grant select on {{ this }}dbt  to role reporting"      
+
+vars:
+  'dbt_date:time_zone': 'America/Los_Angeles'
 
 tests:
   +store_failures: true # all tests
