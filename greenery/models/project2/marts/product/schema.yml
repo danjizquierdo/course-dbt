@@ -11,3 +11,25 @@ models:
         tests: 
           - positive_value
       - name: last_opened_utc
+  - name: fact_daily_funnel
+    columns:
+      - name: session_date
+        tests:
+          - not_null
+      - name: sessions_page_views
+        tests:
+          - positive_value
+      - name: sessions_add_to_cart
+        tests:
+          - positive_value
+      - name: sessions_checkout
+        tests:
+          - positive_value
+      - name: add_to_cart_rate
+        tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+            max_value: 100
+      - name: checkout_rate
+        tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+            max_value: 100

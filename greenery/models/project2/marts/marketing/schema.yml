@@ -73,6 +73,12 @@ models:
       - name: products_seen
         tests:
           - positive_value
+      - name: added_to_cart_events
+        tests:
+          - not_null
+      - name: checkout_events
+        tests:
+          - not_null
       - name: session_start_utc
         tests:
           - not_null
