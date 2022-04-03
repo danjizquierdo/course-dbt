@@ -63,5 +63,26 @@
         | Angel Wings Begonia | 39 |
         | Pothos | 34 |
 </li>
- 
 </ol>
+
+### Week 4 Inquiries
+
+Add to cart rate: 81%
+
+```sql
+SELECT SUM(CASE WHEN added_to_cart_events >0 THEN 1 ELSE 0 END)::float / COUNT(*)
+from dbt_dan_i.fact_user_session
+```
+
+Abandonment rate of carts: 23% 
+```sql
+select 
+SUM(CASE WHEN checkout_events > 0 THEN 1 ELSE 0 END)::float / SUM(CASE WHEN added_to_cart_events > 0 THEN 1 ELSE 0 END)::float * 100.0 as checkout_rate
+from dbt_dan_i.fact_user_session
+```
+
+Overall Conversion rate: 62%
+```sql
+SELECT SUM(CASE WHEN checkout_events >0 THEN 1 ELSE 0 END)::float / COUNT(*)
+from dbt_dan_i.fact_user_session
+```
